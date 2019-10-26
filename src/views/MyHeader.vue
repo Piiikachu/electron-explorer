@@ -1,8 +1,14 @@
 <template>
   <div>
-    <el-row >test</el-row>
-    <el-row >test</el-row>
-    <el-row >test</el-row>
+    <el-row>
+      <MyTab />
+    </el-row>
+    <el-row>
+      <MyNavigate />
+    </el-row>
+    <el-row>
+      <MyFavorite />
+    </el-row>
   </div>
 </template>
 <style>
@@ -13,11 +19,15 @@
 </style>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "../components/HelloWorld.vue";
+import MyTab from "../components/MyTab.vue";
+import MyNavigate from "../components/MyNavigate.vue";
+import MyFavorite from "../components/MyFavorite.vue";
 
 @Component({
   components: {
-    HelloWorld
+    MyTab,
+    MyNavigate,
+    MyFavorite
   }
 })
 export default class MyHeader extends Vue {}
