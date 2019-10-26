@@ -3,12 +3,12 @@
     <el-tabs
       v-model="editableTabsValue"
       type="card"
-      editable="true"
+      editable
       @tab-remove="removeTab"
       @tab-add="addTab(editableTabsValue)"
     >
       <el-tab-pane
-        v-for="(item, index) in editableTabs"
+        v-for="item in editableTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
