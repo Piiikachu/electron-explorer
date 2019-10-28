@@ -9,7 +9,8 @@
         <el-aside width="200px">Aside</el-aside>
 
         <el-main>
-          <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+          <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
+          <router-view></router-view>
         </el-main>
       </el-container>
 
@@ -39,5 +40,14 @@ export default class App extends Vue {}
   /* text-align: center; */
   color: #2c3e50;
   /* margin-top: 60px; */
+}
+.el-aside {
+  background-color: rgb(194, 231, 159);
+}
+.el-main {
+  background-color: rgb(135, 194, 250);
+}
+.el-footer {
+  background-color: rgb(250, 194, 194);
 }
 </style>

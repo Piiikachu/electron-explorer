@@ -6,17 +6,21 @@
       editable
       @tab-remove="removeTab"
       @tab-add="addTab(editableTabsValue)"
+      @tab-click="goto"
     >
       <el-tab-pane
         v-for="item in editableTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
-      >{{item.content}}</el-tab-pane>
+      >
+        
+        <MyNav :title="item.content"/>
+      </el-tab-pane>
     </el-tabs>
     <!-- <div style="margin-bottom: 20px;">
       <el-button size="small" @click="addTab(editableTabsValue)">add tab</el-button>
-    </div> -->
+    </div>-->
   </div>
 </template>
 <style>
@@ -24,6 +28,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
+import MyNav from "./MyNavigate.vue";
 
 interface TabContent {
   title: string;
@@ -31,7 +36,11 @@ interface TabContent {
   content: string;
 }
 
-@Component
+@Component({
+  components: {
+    MyNav
+  }
+})
 export default class MyTab extends Vue {
   editableTabsValue: string = "2";
   tabIndex = 2;
@@ -47,6 +56,9 @@ export default class MyTab extends Vue {
       content: "Tab 2 content"
     }
   ];
+  goto() {
+    this.$router.push("/about");
+  }
   addTab(targetName: string) {
     let newTabName = ++this.tabIndex + "";
     this.editableTabs.push({
