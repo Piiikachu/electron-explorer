@@ -1,7 +1,12 @@
 <template>
   <div>
-    <el-row>
-      <MyTab />
+    <el-row >
+      <el-col :xs="20" :sm="21" :md="22" :lg="23" :xl="23">
+        <MyTab />
+      </el-col>
+      <el-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
+        <div></div>
+      </el-col>
     </el-row>
     <el-row>
       <MyFavorite />

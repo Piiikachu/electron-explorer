@@ -3,19 +3,21 @@
     <el-tabs
       v-model="editableTabsValue"
       type="card"
-      editable
+      closable
       @tab-remove="removeTab"
-      @tab-add="addTab(editableTabsValue)"
-      @tab-click="goto"
+      :before-leave="beforeLeave"
     >
+      <!-- @tab-add="addTab(editableTabsValue)" -->
       <el-tab-pane
         v-for="item in editableTabs"
         :key="item.name"
         :label="item.title"
         :name="item.name"
       >
-        
-        <MyNav :title="item.content"/>
+        <MyNav :title="item.content" />
+      </el-tab-pane>
+      <el-tab-pane key="add" name="add"  >
+        <span slot="label" style="padding: 8px;font-size:20px;">+</span>
       </el-tab-pane>
     </el-tabs>
     <!-- <div style="margin-bottom: 20px;">
@@ -42,27 +44,25 @@ interface TabContent {
   }
 })
 export default class MyTab extends Vue {
-  editableTabsValue: string = "2";
-  tabIndex = 2;
+  editableTabsValue: string = "1";
+  tabIndex = 1;
+  addIndex = 1;
+  currentIndex = 1;
+
   editableTabs: Array<TabContent> = [
     {
       title: "Tab 1",
       name: "1",
       content: "Tab 1 content"
-    },
-    {
-      title: "Tab 2",
-      name: "2",
-      content: "Tab 2 content"
     }
   ];
-  goto() {
-    this.$router.push("/about");
-  }
-  addTab(targetName: string) {
+  // goto() {
+  //   this.$router.push("/about");
+  // }
+  addTab() {
     let newTabName = ++this.tabIndex + "";
     this.editableTabs.push({
-      title: "New Tab",
+      title: "New Tab" + this.tabIndex,
       name: newTabName,
       content: "New Tab content"
     });
@@ -83,6 +83,16 @@ export default class MyTab extends Vue {
     }
     this.editableTabsValue = activeName;
     this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+  }
+  beforeLeave(currentName: string, oldName: string) {
+    var self = this;
+    //重点，如果name是add，则什么都不触发
+    if (currentName == "add") {
+      this.addTab();
+      return false;
+    } else {
+      this.currentIndex = +currentName;
+    }
   }
 }
 </script>
