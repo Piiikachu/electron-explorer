@@ -9,8 +9,8 @@
         <el-aside width="200px">Aside</el-aside>
 
         <el-main>
-          <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
-          <router-view></router-view>
+          <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+          <!-- <router-view></router-view> -->
         </el-main>
       </el-container>
 
@@ -37,6 +37,7 @@ export default class App extends Vue {}
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
   /* text-align: center; */
   color: #2c3e50;
   /* margin-top: 60px; */

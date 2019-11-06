@@ -2,71 +2,49 @@ import fs from 'fs';
 import { promisify } from 'util';
 import path from 'path';
 
-const filePath = path.resolve('c://');
-// fileDisplay(filePath);
+export interface FilePorp {
+    name: string;
+    path: string;
+    type: string;
+}
+
+const filePath = path.resolve('d://');
 const readdirAsync = promisify(fs.readdir);
 const statAsync = promisify(fs.stat);
 
-async function fileDisplayAsync(filepath: string) {
+async function fileStatsAsync(filepath: string) {
+    let result: FilePorp = {
+        name: path.basename(filepath),
+        path: filepath,
+        type: ''
+    };
     try {
-        let files = await readdirAsync(filepath);
-        files.forEach(async (filename) => {
-            let filedir = path.join(filepath, filename);
-            try {
-                let stats = await statAsync(filedir);
-                if (stats.isDirectory()) {
-                    console.log(filedir + '\\');
-                }
-                if (stats.isFile()) {
-                    console.log(filedir);
-                }
-            } catch (error) {
-                console.warn(error);
-            }
-        })
-    } catch (err) {
-        console.warn(err);
+        let stats = await statAsync(filepath);
+        if (stats.isDirectory()) {
+            result.type = 'directory';
+        }
+        if (stats.isFile()) {
+            result.type = 'file'
+        }
+    } catch (error) {
+        console.warn(error);
     }
+    return result;
 }
-fileDisplayAsync(filePath);
-// import fs from "fs";
-// import path from "path";
 
-// interface Result {
-//     file: string;
-//     path: string;
-//     type: string;
-// }
+export default async function fileDisplayAsync(filepath: string) {
+    let results: FilePorp[] = [];
+    let files = await readdirAsync(filepath);
+    for (let filename of files) {
+        let filedir = path.join(filepath, filename);
+        let result = await fileStatsAsync(filedir);
+        results.push(result);
+    }
+    return results;
+}
 
-// async function inspectFileAsync(filepath){
+(async()=>{
+    let results =await fileDisplayAsync(filePath);
+    console.log(results);
+})()
 
-// }
-
-
-// function inspectFile(filepath: string, callback: (err: NodeJS.ErrnoException | null, result?: Result) => void): void {
-//     let result: Result = {
-//         file: path.basename(filepath),
-//         path: filepath,
-//         type: ''
-//     };
-//     fs.stat(filepath, (err, stat) => {
-//         if (err) {
-//             callback(err);
-//         } else {
-//             if (stat.isFile()) {
-//                 result.type = 'file';
-//             }
-//             if (stat.isDirectory()) {
-//                 result.type = 'directory';
-//             }
-//             callback(err,result)
-//         }
-//     });
-// }
-
-// function inpectFolder(folderPath:string,files:Array<string>) {
-//     files.forEach((file)=>{
-//         const resolveFilePath=path.resolve(folderPath,file);
-//         inspectFile(resolveFilePath)
-//     })
-// }

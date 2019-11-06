@@ -13,7 +13,7 @@
     </el-row>
   </div>
 </template>
-<style>
+<style scoped>
 .el-row {
   line-height: 35px;
   align-content: center;

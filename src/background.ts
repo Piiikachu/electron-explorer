@@ -1,14 +1,13 @@
 'use strict'
 
 import { app, protocol, BrowserWindow, ipcMain } from 'electron'
-import fs from "fs"
-import path from 'path'
 import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+import getfiles from './myfs';
 const isDevelopment = process.env.NODE_ENV !== 'production';
-
+const DEFAULT_PATH='D://'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
@@ -33,25 +32,21 @@ function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html');
   }
-
+  // win.webContents.send('',getfiles(DEFAULT_PATH));
   win.on('closed', () => {
     win = null;
   })
-}
+  
+  win.on("ready-to-show",()=>{
+    win!.webContents.send('add-path',DEFAULT_PATH);
+  })
 
-
-function main() {
-  const folderPath = 'C://';
-  fs.readdir(folderPath, (err, files) => {
-    if (err) {
-      console.log("sorry, wrong path");
-    }
-    files.forEach((file) => {
-      console.log(`${folderPath}/${file}`);
-    });
-  });
+  //todo: resize html while the window's size changed
+  // win.on("resize",()=>{})
 
 }
+
+
 
 
 // Quit when all windows are closed.
@@ -90,7 +85,8 @@ app.on('ready', async () => {
 
   }
   createWindow();
-  main();
+  
+ 
 })
 
 // Exit cleanly on request from parent process in development mode.
