@@ -8,13 +8,11 @@ import {
 import getfiles from './myfs';
 import PathStore from './pathstore';
 
-// const ps=new PathStore();
-// ps.on('path-added',()=>{
+const ps = new PathStore();
 
-// })
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const DEFAULT_PATH='D://';
+const DEFAULT_PATH = 'D://';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
@@ -43,9 +41,9 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   })
-  
-  win.on("ready-to-show",()=>{
-    win!.webContents.send('add-path',DEFAULT_PATH);
+
+  win.on("ready-to-show", () => {
+    win!.webContents.send('add-path', DEFAULT_PATH);
   })
 
   //todo: resize html while the window's size changed
@@ -92,8 +90,8 @@ app.on('ready', async () => {
 
   }
   createWindow();
-  
- 
+
+
 })
 
 // Exit cleanly on request from parent process in development mode.

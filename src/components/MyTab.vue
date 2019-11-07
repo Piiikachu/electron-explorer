@@ -31,6 +31,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
 import MyNav from "./MyNavigate.vue";
+import store from '../store';
 
 interface TabContent {
   title: string;
@@ -67,6 +68,7 @@ export default class MyTab extends Vue {
       content: "New Tab content"
     });
     this.editableTabsValue = newTabName;
+    
   }
   removeTab(targetName: string) {
     let tabs = this.editableTabs;
