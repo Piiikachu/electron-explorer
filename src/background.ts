@@ -6,8 +6,15 @@ import {
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
 import getfiles from './myfs';
+import PathStore from './pathstore';
+
+// const ps=new PathStore();
+// ps.on('path-added',()=>{
+
+// })
+
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const DEFAULT_PATH='D://'
+const DEFAULT_PATH='D://';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null;
