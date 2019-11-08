@@ -18,27 +18,26 @@ interface PathContent {
 interface BreadcrumbContent {
   name: string;
   content: PathContent;
-  link?:string;
+  link?: string;
 }
 @Component
 export default class MyNavigate extends Vue {
   @Prop() title!: string;
-  breadCrumb: Array<BreadcrumbContent> = [];
 
-  created() {
-    let dirArray: string[] = this.title.split(" ");
-    let index = 0;
-    for (let dir of dirArray) {
-      this.breadCrumb.push({ name: ++index + "", content: { path: dir } });
-    }
+  get dirArray(): string[] {
+    return this.title.split(" ");
+  }
+  get breadCrumb(): Array<BreadcrumbContent> {
+    let bc: Array<BreadcrumbContent> = [];
+    this.dirArray.forEach((dir, index) => {
+      let content: BreadcrumbContent = {
+        name: ++index + "",
+        content: { path: dir }
+      };
+      bc.push(content);
+    });
+    return bc;
   }
 
-  // @Watch("title")
-  // onChangeValue(oldstr: string, newstr: string) {
-  //   let dirArray: string[] = newstr.split(" ");
-  //   for (let dir of dirArray) {
-  //     this.breadCrumb.push({ name: dir, content: { path: "test" } });
-  //   }
-  // }
 }
 </script>

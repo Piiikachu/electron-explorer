@@ -30,5 +30,6 @@ import MyFavorite from "../components/MyFavorite.vue";
     MyFavorite
   }
 })
-export default class MyHeader extends Vue {}
+export default class MyHeader extends Vue {
+}
 </script>

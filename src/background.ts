@@ -42,15 +42,17 @@ function createWindow() {
     win = null;
   })
 
-  win.on("ready-to-show", () => {
-    win!.webContents.send('add-path', DEFAULT_PATH);
-  })
+  // win.on("ready-to-show", () => {
+  //   win!.webContents.send('add-path', DEFAULT_PATH);
+  // })
 
   //todo: resize html while the window's size changed
   // win.on("resize",()=>{})
 
 }
-
+ipcMain.on('add-path',(event,args)=>{
+  event.reply(DEFAULT_PATH);
+})
 
 
 
@@ -109,7 +111,4 @@ if (isDevelopment) {
   }
 }
 
-ipcMain.on('tab-click-msg', (event, args) => {
-  event.reply('tab-click-reply');
-})
 

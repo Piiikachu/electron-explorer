@@ -16,7 +16,7 @@
       >
         <MyNav :title="item.content" />
       </el-tab-pane>
-      <el-tab-pane key="add" name="add"  >
+      <el-tab-pane key="add" name="add">
         <span slot="label" style="padding: 8px;font-size:20px;">+</span>
       </el-tab-pane>
     </el-tabs>
@@ -31,7 +31,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
 import MyNav from "./MyNavigate.vue";
-import store from '../store';
+import store from "../store";
 
 interface TabContent {
   title: string;
@@ -57,6 +57,9 @@ export default class MyTab extends Vue {
       content: "Tab 1 content"
     }
   ];
+  created() {
+    store.commit("addPath", "d://");
+  }
   // goto() {
   //   this.$router.push("/about");
   // }
@@ -68,7 +71,8 @@ export default class MyTab extends Vue {
       content: "New Tab content"
     });
     this.editableTabsValue = newTabName;
-    
+
+    store.commit("addPath", "e://");
   }
   removeTab(targetName: string) {
     let tabs = this.editableTabs;
@@ -85,6 +89,8 @@ export default class MyTab extends Vue {
     }
     this.editableTabsValue = activeName;
     this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+
+    store.commit("removePath", +targetName);
   }
   beforeLeave(currentName: string, oldName: string) {
     var self = this;
