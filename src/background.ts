@@ -23,7 +23,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: tru
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800, height: 600, webPreferences: {
+    width: 800, height: 600,frame:false, webPreferences: {
       nodeIntegration: true
     }
   })
@@ -50,8 +50,14 @@ function createWindow() {
   // win.on("resize",()=>{})
 
 }
-ipcMain.on('add-path',(event,args)=>{
-  event.reply(DEFAULT_PATH);
+ipcMain.on('min-window', (event, args) => {
+  win!.minimize();
+})
+ipcMain.on('max-window', (event, args) => {
+  win!.maximize();
+})
+ipcMain.on('close-window', (event, args) => {
+  win!.close();
 })
 
 

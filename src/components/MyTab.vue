@@ -8,7 +8,9 @@
         </span>
         {{pane.content}}
       </a-tab-pane>
-      <a-button slot="tabBarExtraContent">Extra Action</a-button>
+      <a-button slot="tabBarExtraContent" @click="minWindow" icon="shrink" type="link"></a-button>
+      <a-button slot="tabBarExtraContent" @click="maxWindow" icon="arrows-alt" type="link"></a-button>
+      <a-button slot="tabBarExtraContent" @click="closeWindow" icon="close" type="link"></a-button>
     </a-tabs>
   </div>
 </template>
@@ -18,7 +20,7 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
 import MyNav from "./MyNavigate.vue";
-import store from "../store";
+import store, { PathContent } from "../store";
 
 interface TabContent {
   title: string;
@@ -38,12 +40,21 @@ interface Pane {
 })
 export default class MyTab extends Vue {
   newTabIndex: number = 0;
-  panes: Pane[] = [
-    { title: "Tab 1", content: "Content of Tab 1", key: "1" },
-    { title: "Tab 2", content: "Content of Tab 2", key: "2" },
-    { title: "Tab 3", content: "Content of Tab 3", key: "3" }
-  ];
-  activeKey: string = this.panes[0].key;
+  panes: Pane[] = [];
+  activeKey: string = "0";
+  pathToPane(path: string) {
+    const pane: Pane = {
+      title: path,
+      content: `Content of path ${path}`,
+      key: `${this.newTabIndex++}`
+    };
+    return pane;
+  }
+  created() {
+    console.log("tab created");
+    this.panes.push(this.pathToPane("E://"));
+    this.activeKey = this.panes[0].key;
+  }
   onChange(key: string) {
     console.log(key);
   }
@@ -52,14 +63,9 @@ export default class MyTab extends Vue {
   }
   add() {
     const panes = this.panes;
-    const activeKey = `newTab${this.newTabIndex++}`;
-    panes.push({
-      title: "New Tab",
-      content: "Content of new Tab",
-      key: activeKey
-    });
+    panes.push(this.pathToPane("d://work"));
+    this.activeKey = `${this.newTabIndex - 1}`;
     this.panes = panes;
-    this.activeKey = activeKey;
   }
   remove(targetKey: string) {
     let activeKey: string = this.activeKey;
@@ -78,7 +84,19 @@ export default class MyTab extends Vue {
       }
     }
     this.panes = panes;
-    this, (activeKey = activeKey);
+    this.activeKey = activeKey;
+    if (panes.length == 0) {
+      this.closeWindow();
+    }
+  }
+  minWindow() {
+    ipcRenderer.send("min-window");
+  }
+  maxWindow() {
+    ipcRenderer.send("max-window");
+  }
+  closeWindow() {
+    ipcRenderer.send("close-window");
   }
 }
 </script>

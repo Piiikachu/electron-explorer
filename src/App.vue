@@ -61,5 +61,6 @@ export default class App extends Vue {}
 }
 #app > .ant-layout {
   color: #aaaaaa;
+  margin-top: 2px;
 }
 </style>
