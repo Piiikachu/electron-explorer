@@ -1,21 +1,15 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <el-container style="height:100%" direction="vertical">
-      <el-header style="height:100%" directrion="vertical">
+    <a-layout>
+      <a-layout-header>
         <MyHeader />
-      </el-header>
-      <el-container>
-        <el-aside width="200px">Aside</el-aside>
-
-        <el-main>
-          <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-          <!-- <router-view></router-view> -->
-        </el-main>
-      </el-container>
-
-      <el-footer>Footer</el-footer>
-    </el-container>
+      </a-layout-header>
+      <a-layout>
+        <a-layout-sider>Sider</a-layout-sider>
+        <a-layout-content>Content</a-layout-content>
+      </a-layout>
+      <a-layout-footer>Footer</a-layout-footer>
+    </a-layout>
   </div>
 </template>
 
@@ -39,16 +33,33 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   /* text-align: center; */
-  color: #2c3e50;
+  color: #aaaaaa;
   /* margin-top: 60px; */
 }
-.el-aside {
-  background-color: rgb(194, 231, 159);
+
+#app .ant-layout-header {
+  height: 100%;
+  background-color: #fff
 }
-.el-main {
-  background-color: rgb(135, 194, 250);
+#app .ant-layout-footer {
+  background: #7dbcea;
+  color: #fff;
 }
-.el-footer {
-  background-color: rgb(250, 194, 194);
+#app .ant-layout-footer {
+  line-height: 1.5;
+}
+#app .ant-layout-sider {
+  background: #3ba0e9;
+  color: #fff;
+  line-height: 120px;
+}
+#app .ant-layout-content {
+  background: rgba(16, 142, 233, 1);
+  color: #fff;
+  min-height: 120px;
+  line-height: 120px;
+}
+#app > .ant-layout {
+  color: #aaaaaa;
 }
 </style>
