@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabs-container" style="-webkit-app-region: drag">
     <a-tabs type="editable-card" v-model="activeKey" @edit="onEdit" @change="onChange">
       <a-tab-pane v-for="pane in panes" :key="pane.key" :closable="pane.closable">
         <span slot="tab">
@@ -8,13 +8,46 @@
         </span>
         {{pane.content}}
       </a-tab-pane>
-      <a-button slot="tabBarExtraContent" @click="minWindow" icon="shrink" type="link"></a-button>
-      <a-button slot="tabBarExtraContent" @click="maxWindow" icon="arrows-alt" type="link"></a-button>
-      <a-button slot="tabBarExtraContent" @click="closeWindow" icon="close" type="link"></a-button>
+      <a-button class="button-window" slot="tabBarExtraContent" @click="minWindow" icon="shrink" type="link"></a-button>
+      <a-button class="button-window" slot="tabBarExtraContent" @click="maxWindow" icon="arrows-alt" type="link"></a-button>
+      <a-button class="button-window" slot="tabBarExtraContent" @click="closeWindow" icon="close" type="link"></a-button>
     </a-tabs>
   </div>
 </template>
 <style>
+.tabs-container {
+  background: #f5f5f5;
+  overflow: hidden;
+  padding: 1px;
+}
+.tabs-container > .ant-tabs-card > .ant-tabs-content {
+  height: 100%;
+  margin-top: -16px;
+}
+
+.tabs-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+
+.tabs-container > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+
+.tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+
+.tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
+
+.tabs-container>.buttonwindow{
+  margin-right: -10px;
+}
+
 </style>
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";

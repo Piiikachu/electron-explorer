@@ -39,7 +39,8 @@ export default class App extends Vue {}
 
 #app .ant-layout-header {
   height: 100%;
-  background-color: #fff
+  background-color: #fff;
+  padding: 0px;
 }
 #app .ant-layout-footer {
   background: #7dbcea;
