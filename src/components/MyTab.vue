@@ -6,6 +6,7 @@
           <a-icon type="folder-open" />
           {{pane.title}}
         </span>
+        <MyNav :path="pane.title"/>
         {{pane.content}}
       </a-tab-pane>
       <a-button
@@ -78,14 +79,13 @@
   background: #fff;
   -webkit-app-region: no-drag;
 }
-
 </style>
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { ipcRenderer } from "electron";
-import MyNav from "./MyNavigate.vue";
+import MyNav from "./MyNav.vue";
 import store, { PathContent } from "../store";
-
+const DEFAULT_PATH: string = "E://";
 interface TabContent {
   title: string;
   name: string;
@@ -125,9 +125,10 @@ export default class MyTab extends Vue {
   onEdit(targetKey: string, action: number) {
     this[action](targetKey);
   }
-  add() {
+  add(path?: string) {
+    let p: string ="d://work";
     const panes = this.panes;
-    panes.push(this.pathToPane("d://work"));
+    panes.push(this.pathToPane(p));
     this.activeKey = `${this.newTabIndex - 1}`;
     this.panes = panes;
   }

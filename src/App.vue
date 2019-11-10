@@ -34,9 +34,9 @@ export default class App extends Vue {}
   height: 100%;
   /* text-align: center; */
   color: #aaaaaa;
+  overflow: hidden;
   /* margin-top: 60px; */
 }
-
 #app .ant-layout-header {
   height: 100%;
   background-color: #fff;
@@ -45,9 +45,10 @@ export default class App extends Vue {}
 #app .ant-layout-footer {
   background: #7dbcea;
   color: #fff;
-}
-#app .ant-layout-footer {
-  line-height: 1.5;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  line-height: 12px;  
 }
 #app .ant-layout-sider {
   background: #3ba0e9;
