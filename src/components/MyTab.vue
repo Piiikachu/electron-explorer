@@ -1,6 +1,6 @@
 <template>
-  <div class="tabs-container" style="-webkit-app-region: drag">
-    <a-tabs type="editable-card" v-model="activeKey" @edit="onEdit" @change="onChange">
+  <div class="tabs-container">
+    <a-tabs type="editable-card" v-model="activeKey" @edit="onEdit" @change="onChange" hideAdd>
       <a-tab-pane v-for="pane in panes" :key="pane.key" :closable="pane.closable">
         <span slot="tab">
           <a-icon type="folder-open" />
@@ -8,9 +8,38 @@
         </span>
         {{pane.content}}
       </a-tab-pane>
-      <a-button class="button-window" slot="tabBarExtraContent" @click="minWindow" icon="shrink" type="link"></a-button>
-      <a-button class="button-window" slot="tabBarExtraContent" @click="maxWindow" icon="arrows-alt" type="link"></a-button>
-      <a-button class="button-window" slot="tabBarExtraContent" @click="closeWindow" icon="close" type="link"></a-button>
+      <a-button
+        slot="tabBarExtraContent"
+        @click="add"
+        icon="plus-square"
+        type="link"
+        style="-webkit-app-region: no-drag"
+        size="large"
+      ></a-button>
+      <a-button
+        slot="tabBarExtraContent"
+        @click="minWindow"
+        icon="shrink"
+        type="link"
+        style="-webkit-app-region: no-drag"
+        size="large"
+      ></a-button>
+      <a-button
+        slot="tabBarExtraContent"
+        @click="maxWindow"
+        icon="arrows-alt"
+        type="link"
+        style="-webkit-app-region: no-drag"
+        size="large"
+      ></a-button>
+      <a-button
+        slot="tabBarExtraContent"
+        @click="closeWindow"
+        icon="close"
+        type="link"
+        style="-webkit-app-region: no-drag"
+        size="large"
+      ></a-button>
     </a-tabs>
   </div>
 </template>
@@ -19,33 +48,35 @@
   background: #f5f5f5;
   overflow: hidden;
   padding: 1px;
+  -webkit-app-region: drag;
 }
 .tabs-container > .ant-tabs-card > .ant-tabs-content {
   height: 100%;
   margin-top: -16px;
+  -webkit-app-region: no-drag;
 }
 
 .tabs-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
   padding: 16px;
+  -webkit-app-region: no-drag;
 }
 
 .tabs-container > .ant-tabs-card > .ant-tabs-bar {
   border-color: #fff;
+  -webkit-user-select: none;
 }
 
 .tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
   border-color: transparent;
   background: transparent;
+  -webkit-app-region: no-drag;
 }
 
 .tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
   border-color: #fff;
   background: #fff;
-}
-
-.tabs-container>.buttonwindow{
-  margin-right: -10px;
+  -webkit-app-region: no-drag;
 }
 
 </style>
