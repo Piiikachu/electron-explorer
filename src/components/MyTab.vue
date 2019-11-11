@@ -9,13 +9,13 @@
         <MyNav :path="pane.title" />
       </a-tab-pane>
       <a-button
+        id="btn-plus"
         slot="tabBarExtraContent"
         @click="add"
         icon="plus-square"
         style="-webkit-app-region: no-drag"
         size="large"
       ></a-button>
-      
       <a-button
         slot="tabBarExtraContent"
         @click="minWindow"
@@ -72,7 +72,10 @@
   background: transparent;
   -webkit-app-region: no-drag;
 }
-
+.tabs-container #btn-plus {
+  margin-right: 5px;
+  border-right-color: #f5f5f5;
+}
 .tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
   border-color: #fff;
   background: #fff;

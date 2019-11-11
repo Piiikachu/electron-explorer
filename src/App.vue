@@ -1,26 +1,26 @@
 <template>
   <div id="app">
-    <a-layout>
-      <a-layout-header>
-        <MyHeader />
-      </a-layout-header>
-      <a-layout>
-        <a-layout-sider>Sider</a-layout-sider>
-        <a-layout-content>Content</a-layout-content>
-      </a-layout>
-      <a-layout-footer>Footer</a-layout-footer>
-    </a-layout>
+    <div class="header">
+      <MyHeader />
+    </div>
+    <div class="main">
+      <div class="sider">
+        <MySider />
+      </div>
+      <div class="content">content</div>
+    </div>
+    <div class="footer">footer</div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
 import MyHeader from "./views/MyHeader.vue";
+import MySider from "./components/MySider.vue";
 @Component({
   components: {
     MyHeader,
-    HelloWorld
+    MySider
   }
 })
 export default class App extends Vue {}
@@ -31,38 +31,43 @@ export default class App extends Vue {}
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-  /* text-align: center; */
+  min-height: 100%;
   color: #aaaaaa;
-  overflow: hidden;
-  /* margin-top: 60px; */
+  display: flex;
+  flex-direction: column;
 }
-#app .ant-layout-header {
+#app .header {
+  margin-top: 1px;
+  background-color: pink;
+}
+#app .main {
+  flex: 1;
+  display: flex;
   height: 100%;
-  background-color: #fff;
-  padding: 0px;
+  width: 100%;
+  flex-direction: row;
 }
-#app .ant-layout-footer {
-  background: #7dbcea;
+#app .main .sider {
+  border: #aaaaaa;
+  border-right-width: 1px;
+  min-width: 120px;
+  width: 200px;
   color: #fff;
+}
+#app .main .content {
+  flex: auto;
+  color: #fff;
+}
+/* #app .footer {
+  background-color: lightblue;
+  height: 20px;
+  color: #fff;
+} */
+#app .footer{
   position: fixed;
   bottom: 0px;
+  height: 20px;
   width: 100%;
-  line-height: 12px;  
-}
-#app .ant-layout-sider {
-  background: #3ba0e9;
-  color: #fff;
-  line-height: 120px;
-}
-#app .ant-layout-content {
-  background: rgba(16, 142, 233, 1);
-  color: #fff;
-  min-height: 120px;
-  line-height: 120px;
-}
-#app > .ant-layout {
-  color: #aaaaaa;
-  margin-top: 2px;
+  background-color: lightblue;
 }
 </style>
