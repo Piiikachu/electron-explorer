@@ -6,22 +6,20 @@
           <a-icon type="folder-open" />
           {{pane.title}}
         </span>
-        <MyNav :path="pane.title"/>
-        {{pane.content}}
+        <MyNav :path="pane.title" />
       </a-tab-pane>
       <a-button
         slot="tabBarExtraContent"
         @click="add"
         icon="plus-square"
-        type="link"
         style="-webkit-app-region: no-drag"
         size="large"
       ></a-button>
+      
       <a-button
         slot="tabBarExtraContent"
         @click="minWindow"
         icon="shrink"
-        type="link"
         style="-webkit-app-region: no-drag"
         size="large"
       ></a-button>
@@ -29,7 +27,6 @@
         slot="tabBarExtraContent"
         @click="maxWindow"
         icon="arrows-alt"
-        type="link"
         style="-webkit-app-region: no-drag"
         size="large"
       ></a-button>
@@ -37,7 +34,6 @@
         slot="tabBarExtraContent"
         @click="closeWindow"
         icon="close"
-        type="link"
         style="-webkit-app-region: no-drag"
         size="large"
       ></a-button>
@@ -59,7 +55,7 @@
 
 .tabs-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
-  padding: 16px;
+  padding: 8px;
   -webkit-app-region: no-drag;
 }
 
@@ -67,7 +63,10 @@
   border-color: #fff;
   -webkit-user-select: none;
 }
-
+.tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-btn {
+  border-radius: 0px;
+  border-color: transparent;
+}
 .tabs-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
   border-color: transparent;
   background: transparent;
@@ -125,11 +124,17 @@ export default class MyTab extends Vue {
   onEdit(targetKey: string, action: number) {
     this[action](targetKey);
   }
-  add(path?: string) {
-    let p: string ="d://work";
+  add() {
+    this.addPath("E://work");
+  }
+  addPath(path: string) {
+    this.addPathBackground(path);
+    this.activeKey = `${this.newTabIndex - 1}`;
+  }
+  addPathBackground(path: string) {
+    let p: string = path;
     const panes = this.panes;
     panes.push(this.pathToPane(p));
-    this.activeKey = `${this.newTabIndex - 1}`;
     this.panes = panes;
   }
   remove(targetKey: string) {
