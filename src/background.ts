@@ -23,7 +23,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: tru
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800, height: 600,frame:false,minWidth:600,minHeight:400, webPreferences: {
+    width: 800, height: 600, frame: false, minWidth: 600, minHeight: 400, webPreferences: {
       nodeIntegration: true
     }
   })
@@ -41,7 +41,14 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   })
-
+  win.on('resize', () => {
+    let size: number[] = win!.getSize();
+    win!.webContents.send('win-resize', size);
+  })
+  // win.on("ready-to-show", () => {
+  //   let size: string = `size: ${win!.getSize()}`;
+  //   win!.webContents.send('win-resize', size);
+  // })
   // win.on("ready-to-show", () => {
   //   win!.webContents.send('add-path', DEFAULT_PATH);
   // })

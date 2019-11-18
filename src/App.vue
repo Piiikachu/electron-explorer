@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="style">
     <div class="header">
       <MyHeader />
     </div>
@@ -17,13 +17,33 @@
 import { Component, Vue } from "vue-property-decorator";
 import MyHeader from "./views/MyHeader.vue";
 import MySider from "./components/MySider.vue";
+import { ipcRenderer } from "electron";
+
+interface CssStyle {
+  width: string;
+  height: string;
+}
 @Component({
   components: {
     MyHeader,
     MySider
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  style = {
+    width: "400px",
+    height: "600px"
+  };
+  created() {
+    ipcRenderer.on("win-resize", (event, size: number[]) => {
+      let s: CssStyle = {
+        width: `${size[0]}px`,
+        height: `${size[1]}px`
+      };
+      this.style = s;
+    });
+  }
+}
 </script>
 
 <style>
@@ -43,31 +63,33 @@ export default class App extends Vue {}
 #app .main {
   flex: 1;
   display: flex;
-  height: 100%;
   width: 100%;
   flex-direction: row;
+  overflow: hidden;
 }
 #app .main .sider {
-  border: #aaaaaa;
-  border-right-width: 1px;
+  border: red solid 1px;
   min-width: 120px;
   width: 200px;
   color: #fff;
+  overflow: auto;
 }
 #app .main .content {
   flex: auto;
-  color: #fff;
+  color: black;
+  overflow: auto;
 }
-/* #app .footer {
-  background-color: lightblue;
+#app .footer {
+  background-color: rgb(167, 233, 255);
   height: 20px;
   color: #fff;
-} */
-#app .footer{
+  flex-shrink: 0;
+}
+/* #app .footer {
   position: fixed;
   bottom: 0px;
   height: 20px;
   width: 100%;
   background-color: lightblue;
-}
+} */
 </style>

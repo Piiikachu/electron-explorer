@@ -21,9 +21,7 @@
 </template>
 <style scoped>
 .tree-container{
-    height: 100%;
-    overflow: auto;
-    margin-bottom: 20px;
+    height: auto;
 }
 </style>
 <script lang="ts">
