@@ -23,6 +23,12 @@ interface CssStyle {
   width: string;
   height: string;
 }
+
+interface PathContent {
+  index: number;
+  path: string;
+}
+
 @Component({
   components: {
     MyHeader,
@@ -31,7 +37,7 @@ interface CssStyle {
 })
 export default class App extends Vue {
   style = {
-    width: "400px",
+    width: "800px",
     height: "600px"
   };
   created() {
@@ -43,6 +49,8 @@ export default class App extends Vue {
       this.style = s;
     });
   }
+  paths: PathContent[] = [];
+
 }
 </script>
 
@@ -81,7 +89,7 @@ export default class App extends Vue {
 }
 #app .footer {
   background-color: rgb(167, 233, 255);
-  height: 20px;
+  height: 25px;
   color: #fff;
   flex-shrink: 0;
 }

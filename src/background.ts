@@ -61,6 +61,9 @@ ipcMain.on('min-window', (event, args) => {
   win!.minimize();
 })
 ipcMain.on('max-window', (event, args) => {
+  if(win!.isMaximized){
+    
+  }
   win!.maximize();
 })
 ipcMain.on('close-window', (event, args) => {
