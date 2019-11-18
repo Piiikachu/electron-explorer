@@ -61,10 +61,11 @@ ipcMain.on('min-window', (event, args) => {
   win!.minimize();
 })
 ipcMain.on('max-window', (event, args) => {
-  if(win!.isMaximized){
-    
+  if (win!.isMaximized()) {
+    win!.unmaximize()
+  } else {
+    win!.maximize();
   }
-  win!.maximize();
 })
 ipcMain.on('close-window', (event, args) => {
   win!.close();

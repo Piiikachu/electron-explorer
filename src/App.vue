@@ -93,11 +93,4 @@ export default class App extends Vue {
   color: #fff;
   flex-shrink: 0;
 }
-/* #app .footer {
-  position: fixed;
-  bottom: 0px;
-  height: 20px;
-  width: 100%;
-  background-color: lightblue;
-} */
 </style>
