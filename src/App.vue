@@ -4,10 +4,19 @@
       <MyHeader />
     </div>
     <div class="main">
-      <div class="sider">
+      <!-- <div class="sider">
         <MySider />
       </div>
-      <div class="content"><MyContent /></div>
+      <div class="content"><MyContent /></div>-->
+      <Split v-model="split1" min="120px">
+        <div slot="left" class="demo-split-pane" id="left">
+          <MySider />
+        </div>
+        <div slot="right" class="demo-split-pane">
+          <!-- <MyContent /> -->
+          <MyTable />
+        </div>
+      </Split>
     </div>
     <div class="footer">footer</div>
   </div>
@@ -17,7 +26,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import MyHeader from "./views/MyHeader.vue";
 import MySider from "./components/MySider.vue";
-import MyContent from './components/MyContent.vue';
+import MyContent from "./components/MyContent.vue";
+import MyTable from './components/MyTable.vue';
 import { ipcRenderer } from "electron";
 
 interface CssStyle {
@@ -34,10 +44,12 @@ interface PathContent {
   components: {
     MyHeader,
     MySider,
-    MyContent
+    MyContent,
+    MyTable
   }
 })
 export default class App extends Vue {
+  split1 = 0.5;
   style = {
     width: "800px",
     height: "600px"
@@ -52,7 +64,6 @@ export default class App extends Vue {
     });
   }
   paths: PathContent[] = [];
-
 }
 </script>
 
@@ -62,13 +73,11 @@ export default class App extends Vue {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%;
-  color: #aaaaaa;
   display: flex;
   flex-direction: column;
 }
 #app .header {
   margin-top: 1px;
-  background-color: pink;
 }
 #app .main {
   flex: 1;
@@ -76,17 +85,13 @@ export default class App extends Vue {
   width: 100%;
   flex-direction: row;
   overflow: hidden;
+  border: 1px solid #dcdee2;
 }
-#app .main .sider {
-  border: red solid 1px;
-  min-width: 200px;
-  width: 200px;
-  color: #fff;
-  overflow: auto;
+#app .main .demo-split-pane {
+  padding: 10px;
 }
-#app .main .content {
-  flex: auto;
-  color: black;
+#left {
+  height: 100%;
   overflow: auto;
 }
 #app .footer {

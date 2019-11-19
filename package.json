@@ -15,6 +15,7 @@
   "dependencies": {
     "ant-design-vue": "^1.4.4",
     "core-js": "^3.3.2",
+    "view-design": "^4.0.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0",
