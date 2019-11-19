@@ -7,7 +7,7 @@
       <div class="sider">
         <MySider />
       </div>
-      <div class="content">content</div>
+      <div class="content"><MyContent /></div>
     </div>
     <div class="footer">footer</div>
   </div>
@@ -17,6 +17,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import MyHeader from "./views/MyHeader.vue";
 import MySider from "./components/MySider.vue";
+import MyContent from './components/MyContent.vue';
 import { ipcRenderer } from "electron";
 
 interface CssStyle {
@@ -32,7 +33,8 @@ interface PathContent {
 @Component({
   components: {
     MyHeader,
-    MySider
+    MySider,
+    MyContent
   }
 })
 export default class App extends Vue {
@@ -77,7 +79,7 @@ export default class App extends Vue {
 }
 #app .main .sider {
   border: red solid 1px;
-  min-width: 120px;
+  min-width: 200px;
   width: 200px;
   color: #fff;
   overflow: auto;

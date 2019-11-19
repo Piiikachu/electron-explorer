@@ -22,6 +22,7 @@
 <style scoped>
 .tree-container{
     height: auto;
+    width: 100%;
     -webkit-user-select: none;
 }
 </style>
